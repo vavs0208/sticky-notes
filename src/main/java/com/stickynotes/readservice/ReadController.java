@@ -12,7 +12,7 @@ public class ReadController {
 	@RequestMapping(value = "/health", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> health() {
-			String serverStatus = " All OK";
+			String serverStatus = "All OK";
 			return new ResponseEntity<String>(serverStatus,HttpStatus.OK);
 		}
 }
