@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stickynotes.entities.User;
+import com.stickynotes.entities.UserEntity;
 import com.stickynotes.repository.UserRepository;
 
 @RestController
@@ -29,8 +29,8 @@ public class ReadController {
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseBody
-	public List<User> getAllUserNames() {
-		List<User> users = new ArrayList<User>();
+	public List<UserEntity> getAllUserNames() {
+		List<UserEntity> users = new ArrayList<UserEntity>();
 		userRepository.findAll().forEach(users::add);
 		return users;
 		}
