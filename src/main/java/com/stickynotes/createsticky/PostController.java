@@ -18,11 +18,6 @@ public class PostController {
 
 	@Autowired
 	CreateStickyNotesService createStickyNotesService;
-	
-	public ResponseEntity<String> health() {
-		String serverStatus = " All OK";
-		return new ResponseEntity<String>(serverStatus,HttpStatus.OK);
-	}
 
 	@RequestMapping(value = "/createSticky", method = RequestMethod.POST,
 			headers = "Accept=application/json")
