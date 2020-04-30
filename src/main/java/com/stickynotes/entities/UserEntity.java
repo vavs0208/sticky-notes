@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user")
-public class User {
+public class UserEntity {
 	
 	public String getUserid() {
 		return userid;
