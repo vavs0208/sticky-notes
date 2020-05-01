@@ -27,4 +27,13 @@ public class PostController {
 		return new ResponseEntity<StickyNotesDto>(createStickyNotesService.createStickyNotes(stickyNotes)
 				,HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/updateSticky", method = RequestMethod.POST,
+			headers = "Accept=application/json")
+	@ResponseBody
+	public ResponseEntity<StickyNotesDto> updateSticky(@RequestBody StickyNotesPojo stickyNotes) {
+
+		return new ResponseEntity<StickyNotesDto>(createStickyNotesService.updateStickyNotes(stickyNotes)
+				,HttpStatus.OK);
+	}
 }

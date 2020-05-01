@@ -6,4 +6,5 @@ import com.stickynotes.pojos.StickyNotesPojo;
 public interface CreateStickyNotesService {
 
 	public StickyNotesDto createStickyNotes(StickyNotesPojo stickyNotes);
+	public StickyNotesDto updateStickyNotes(StickyNotesPojo stickyNotes);
 }

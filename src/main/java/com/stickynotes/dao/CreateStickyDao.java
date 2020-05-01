@@ -46,4 +46,11 @@ public class CreateStickyDao {
 		modelMapper.map(stickyNotesEntityUpdated, stickyNotesDto);
 		return stickyNotesDto;
 	}
+
+
+	public StickyNotesDto updateStickyNotes(StickyNotesPojo stickyNotes) {
+		
+		
+		return null;
+	}
 }
