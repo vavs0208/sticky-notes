@@ -32,11 +32,18 @@ public class UserEntity {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	@Id
 	private String userid;
 	private String name;
 	private String email;
 	private String country;
+	private String password;
 }

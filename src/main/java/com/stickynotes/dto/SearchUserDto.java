@@ -1,11 +1,11 @@
 package com.stickynotes.dto;
 
-public class UserDto {
+public class SearchUserDto {
 
 	private String userid;
 	private String name;
-	private String email;
-	private String country;
+	private boolean isPresent;
+	private String messege;
 	private String password;
 	
 	public String getUserid() {
@@ -20,17 +20,17 @@ public class UserDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
-		return email;
+	public boolean isPresent() {
+		return isPresent;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPresent(boolean isPresent) {
+		this.isPresent = isPresent;
 	}
-	public String getCountry() {
-		return country;
+	public String getMessege() {
+		return messege;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setMessege(String messege) {
+		this.messege = messege;
 	}
 	public String getPassword() {
 		return password;
@@ -38,5 +38,6 @@ public class UserDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	
 }

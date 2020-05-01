@@ -1,6 +1,6 @@
-package com.stickynotes.dto;
+package com.stickynotes.pojos;
 
-public class UserDto {
+public class UserPojo {
 
 	private String userid;
 	private String name;
@@ -38,5 +38,6 @@ public class UserDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	
 }

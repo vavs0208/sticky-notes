@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.stickynotes.dto.StickyNotesDto;
+import com.stickynotes.dto.UserDto;
 import com.stickynotes.pojos.StickyNotesPojo;
+import com.stickynotes.pojos.UserPojo;
 import com.stickynotes.services.CreateStickyNotesService;
+import com.stickynotes.services.CreateUserService;
 
 @Controller
 public class PostController {
@@ -26,5 +29,15 @@ public class PostController {
 
 		return new ResponseEntity<StickyNotesDto>(createStickyNotesService.createStickyNotes(stickyNotes)
 				,HttpStatus.OK);
+	}
+	
+	@Autowired
+	CreateUserService createUserService;
+	
+	@RequestMapping(value="/addUser", method=RequestMethod.POST, headers="Accept=application/json")
+	@ResponseBody
+	public ResponseEntity<UserDto> createUser(@RequestBody UserPojo userPojo){
+		
+		return new ResponseEntity<UserDto>(createUserService.createUser(userPojo),HttpStatus.OK);
 	}
 }
