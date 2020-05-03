@@ -3,13 +3,20 @@ package com.stickynotes.pojos;
 import java.util.Date;
 
 public class StickyNotesPojo {
-	
+
 	public String userid;
 	public String content;
 	public Boolean isActive;
 	public Date createdDate;
 	public Date updatedDate;
+	public Long stickyNotesId ;
 	
+	public Long getStickyNotesId() {
+		return stickyNotesId;
+	}
+	public void setStickyNotesId(Long stickyNotesId) {
+		this.stickyNotesId = stickyNotesId;
+	}
 	public String getUserid() {
 		return userid;
 	}

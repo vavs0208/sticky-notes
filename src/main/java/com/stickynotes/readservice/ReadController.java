@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stickynotes.entities.StickyNotesEntity;
 import com.stickynotes.entities.UserEntity;
+import com.stickynotes.repository.StickyNotesRepository;
 import com.stickynotes.repository.UserRepository;
 
 @RestController
@@ -19,6 +21,9 @@ public class ReadController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	StickyNotesRepository notesRepository;
 	
 	@RequestMapping(value = "/health", method = RequestMethod.GET)
 	@ResponseBody
@@ -33,6 +38,14 @@ public class ReadController {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 		userRepository.findAll().forEach(users::add);
 		return users;
+		}
+	
+	@RequestMapping(value = "/notes", method = RequestMethod.GET)
+	@ResponseBody
+	public List<StickyNotesEntity> getAllNotes() {
+		List<StickyNotesEntity> notes = new ArrayList<StickyNotesEntity>();
+		notesRepository.findAll().forEach(notes::add);
+		return notes;
 		}
 }
 	

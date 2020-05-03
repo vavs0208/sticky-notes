@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class StickyNotesDto {
 	
-	private String stickyNotesId;
+	private Long stickyNotesId;
 	private String content;
 	private Boolean isActive;
     private Date createdAt;
@@ -13,10 +13,10 @@ public class StickyNotesDto {
     
     
     
-	public String getStickyNotesId() {
+	public Long getStickyNotesId() {
 		return stickyNotesId;
 	}
-	public void setStickyNotesId(String stickyNotesId) {
+	public void setStickyNotesId(Long stickyNotesId) {
 		this.stickyNotesId = stickyNotesId;
 	}
 	public String getContent() {
