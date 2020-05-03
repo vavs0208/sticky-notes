@@ -17,10 +17,9 @@ public class CreateStickyNotesServiceImpl implements CreateStickyNotesService {
 	public StickyNotesDto createStickyNotes(StickyNotesPojo stickyNotes) {
 		return createStickyDao.createStickyNotes(stickyNotes);
 	}
+
 	
-	@Override
-	public StickyNotesDto updateStickyNotes(StickyNotesPojo stickyNotes) {
-		return createStickyDao.updateStickyNotes(stickyNotes);
-	}
+	
+		
 
 }

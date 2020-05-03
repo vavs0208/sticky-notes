@@ -4,8 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.stickynotes.entities.StickyNotesEntity;
+import com.stickynotes.entities.UserEntity;
 
-@Repository
-public interface CreateStickyRepository extends CrudRepository<StickyNotesEntity,Long> {
 
-}
+	@Repository
+	public interface StickyNotesRepository extends CrudRepository<StickyNotesEntity,Long> {
+		
+	}

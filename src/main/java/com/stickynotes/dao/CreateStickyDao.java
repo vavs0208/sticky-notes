@@ -26,8 +26,7 @@ public class CreateStickyDao {
 	@Autowired
 	CreateStickyRepository createStickyRepository;
 	
-
-	public StickyNotesDto createStickyNotes(StickyNotesPojo stickyNotesPojo) {
+		public StickyNotesDto createStickyNotes(StickyNotesPojo stickyNotesPojo) {
 		
 		Optional<UserEntity> optional = userRepository.findById(stickyNotesPojo.userid);
 		UserEntity userEntity  = optional.get();
@@ -48,9 +47,4 @@ public class CreateStickyDao {
 	}
 
 
-	public StickyNotesDto updateStickyNotes(StickyNotesPojo stickyNotes) {
-		
-		
-		return null;
-	}
 }
