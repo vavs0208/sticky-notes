@@ -14,7 +14,7 @@ public class UpdateStickyServiceImpl implements UpdateStickyService{
 	UpdateSticky updateStickydao;
 
 	@Override
-	public StickyNotesDto updateStickyrags(StickyNotesPojo stickyNotesPojo) {
+	public StickyNotesDto updateSticky(StickyNotesPojo stickyNotesPojo) {
 		return updateStickydao.updateStickyNotes(stickyNotesPojo);
 	}
 

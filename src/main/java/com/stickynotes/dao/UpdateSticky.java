@@ -1,6 +1,8 @@
 package com.stickynotes.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -28,28 +30,33 @@ public class UpdateSticky {
 	@Autowired
 	UserRepository userRepository;
 	
-	
 	public StickyNotesDto updateStickyNotes(StickyNotesPojo stickyNotesPojo) {
 		Optional<UserEntity> optional = userRepository.findById(stickyNotesPojo.userid);
-	UserEntity userEntity  = optional.get();
-	StickyNotesEntity stickyNotesEntity=new StickyNotesEntity();
-	stickyNotesEntity.setUserEntity(userEntity);	
+		StickyNotesDto stickyNotesDto =  new StickyNotesDto();
+	if(optional.isPresent()) {
+		UserEntity userEntity  = optional.get();
+		StickyNotesEntity stickyNotesEntity=new StickyNotesEntity();
+		stickyNotesEntity.setUserEntity(userEntity);	
+
+		Optional<StickyNotesEntity> stickyOptional = createStickyRepository.findByUserEntityAndStickyNotesId(userEntity,stickyNotesPojo.stickyNotesId);
+		if(stickyOptional.isPresent()) {
+			StickyNotesEntity StickyNotesEntity= stickyOptional.get();
+			stickyNotesEntity.setStickyNotesId(stickyNotesPojo.stickyNotesId);
+				stickyNotesEntity.setContent(stickyNotesPojo.content);
+				stickyNotesEntity.setCreatedAt(StickyNotesEntity.getCreatedAt());
+				stickyNotesEntity.setUpdatedAt(new Date());
+				stickyNotesEntity.setIsActive(true);				
+					StickyNotesEntity stickyNotesEntityUpdated = createStickyRepository.save(stickyNotesEntity);					
+					ModelMapper modelMapper = new ModelMapper();		
+					modelMapper.map(stickyNotesEntityUpdated, stickyNotesDto);
+			
+		}else {
+			stickyNotesDto.setContent("No note found to update, of stickyNotesId: "+stickyNotesPojo.stickyNotesId+" and user: "+stickyNotesPojo.userid);}
 	
-		Optional<StickyNotesEntity> stickyOptional = createStickyRepository.findById(stickyNotesPojo.getStickyNotesId());
-		stickyNotesEntity.setStickyNotesId(stickyNotesPojo.getStickyNotesId());
-		StickyNotesEntity StickyNotesEntity  = stickyOptional.get();
-		stickyNotesEntity.setContent(stickyNotesPojo.content);
-		stickyNotesEntity.setCreatedAt(StickyNotesEntity.getCreatedAt());
-		stickyNotesEntity.setUpdatedAt(new Date());
-		stickyNotesEntity.setIsActive(true);
-		
-			StickyNotesEntity stickyNotesEntityUpdated = createStickyRepository.save(stickyNotesEntity);
-			StickyNotesDto stickyNotesDto =  new StickyNotesDto();
-			ModelMapper modelMapper = new ModelMapper();		
-			modelMapper.map(stickyNotesEntityUpdated, stickyNotesDto);
-			return stickyNotesDto;
-	
-						
+	}else {
+		stickyNotesDto.setContent("No user exist of userid: "+stickyNotesPojo.userid);		
+	}
+	return stickyNotesDto;						
 	}
 
 }

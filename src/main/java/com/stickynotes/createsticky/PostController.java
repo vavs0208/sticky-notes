@@ -40,16 +40,7 @@ public class PostController {
 	@ResponseBody
 	public ResponseEntity<StickyNotesDto> updateSticky(@RequestBody StickyNotesPojo stickyNotes) {
 
-		return new ResponseEntity<StickyNotesDto>(updateStickyService.updateStickyrags(stickyNotes)
+		return new ResponseEntity<StickyNotesDto>(updateStickyService.updateSticky(stickyNotes)
 				,HttpStatus.OK);
-	}
-	
-	@PutMapping(value="/update")
-	public ResponseEntity<StickyNotesDto> updateStickyrags(@RequestBody StickyNotesPojo stickyNotesPojo ) {
-
-		return new ResponseEntity<StickyNotesDto>(updateStickyService.updateStickyrags(stickyNotesPojo)
-				,HttpStatus.OK);
-	}
-	
-	
+	}	
 }

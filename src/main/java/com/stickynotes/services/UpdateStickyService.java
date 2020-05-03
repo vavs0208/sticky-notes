@@ -6,5 +6,5 @@ import com.stickynotes.pojos.StickyNotesPojo;
 public interface UpdateStickyService {
 
 	
-	public StickyNotesDto updateStickyrags(StickyNotesPojo stickyNotesPojo);
+	public StickyNotesDto updateSticky(StickyNotesPojo stickyNotesPojo);
 }
