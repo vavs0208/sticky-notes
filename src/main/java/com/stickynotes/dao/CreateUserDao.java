@@ -1,44 +1,49 @@
 package com.stickynotes.dao;
 
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
-import com.stickynotes.dto.UserDto;
+
+import com.stickynotes.dto.SearchUserDto;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.pojos.UserPojo;
+import com.stickynotes.readservice.PasswordEncoderMatcher;
 import com.stickynotes.repository.UserRepository;
 
 
 @Repository
+@PropertySource(value="content.properties")
 public class CreateUserDao {
 
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	PasswordEncoderMatcher passwordEncoderMatcher;
 	
+	@Autowired
+	Environment env;
 	
-	public UserDto createUser(UserPojo userPojo){
+	public SearchUserDto createUser(UserPojo userPojo){
 		
-		UserDto userDto=new UserDto();
+		SearchUserDto searchUserDto=new SearchUserDto();
 		
 		UserEntity userEntity=new UserEntity();
-		userEntity.setUserid(userPojo.getUserid());
-		userEntity.setName(userPojo.getName());
-		userEntity.setEmail(userPojo.getEmail());
-		userEntity.setCountry(userPojo.getCountry());
-		userEntity.setPassword(hashPassword(userPojo.getPassword()));
+		ModelMapper modelMapper = new ModelMapper();
+		userPojo.setPassword(passwordEncoderMatcher.hashPassword(userPojo.getPassword()));
+		modelMapper.map(userPojo, userEntity);
 		
 		UserEntity userEntityNew=userRepository.save(userEntity);
-		ModelMapper modelMapper = new ModelMapper();
 		
-		modelMapper.map(userEntityNew, userDto);
+		modelMapper.map(userEntityNew, searchUserDto);
 		
-		return userDto;
+		searchUserDto.setPresent(true);
+		searchUserDto.setMessege(env.getProperty("usercreated"));
+		
+		return searchUserDto;
 	}
 	
-	public String hashPassword(String plainTextPassword){
-		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
-	}
 }

@@ -3,9 +3,7 @@ package com.stickynotes.services;
 import com.stickynotes.dto.SearchUserDto;
 import com.stickynotes.pojos.UserPojo;
 
+public interface ChangeUserPassword {
 
-public interface CreateUserService {
-
-	public SearchUserDto createUser(UserPojo userPojo);
-	
+	public SearchUserDto changeUserPassword(UserPojo userPojo);
 }

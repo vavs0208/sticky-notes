@@ -1,16 +1,18 @@
 package com.stickynotes.readservice;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PasswordEncoderMatcher {
 
-	public String match(String passText,String passEncoded){
-		String result;
-		if(passEncoded.equals(hashPassword(passText))){
-			result="User Authenticated";
+	public boolean match(String passText,String passEncoded){
+		boolean result;
+		if(BCrypt.checkpw(passText, passEncoded)){
+			result=true;
 		}
 		else{
-			result="User not Authenticated";
+			result=false;
 		}
 		return result;
 	}

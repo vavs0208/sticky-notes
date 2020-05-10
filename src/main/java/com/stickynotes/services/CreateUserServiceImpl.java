@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stickynotes.dao.CreateUserDao;
-import com.stickynotes.dto.UserDto;
+import com.stickynotes.dto.SearchUserDto;
 import com.stickynotes.pojos.UserPojo;
 
 @Service
@@ -14,7 +14,7 @@ public class CreateUserServiceImpl implements CreateUserService{
 	CreateUserDao creatUserDao;
 	
 	@Override
-	public UserDto createUser(UserPojo userPojo) {
+	public SearchUserDto createUser(UserPojo userPojo) {
 		
 		return creatUserDao.createUser(userPojo);
 	}

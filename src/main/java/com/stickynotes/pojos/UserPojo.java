@@ -1,11 +1,26 @@
 package com.stickynotes.pojos;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import org.springframework.context.annotation.PropertySource;
+
+
+@PropertySource(value="content.properties")
 public class UserPojo {
 
+	@NotBlank(message="{userIdvalidation}")
 	private String userid;
+	
 	private String name;
+	
+	@Email(regexp = ".+@.+\\..+")
 	private String email;
+	
 	private String country;
+	
+	@NotBlank(message="{passwordvalidation}")
+	@Size(min=8, max=55)
 	private String password;
 	
 	public String getUserid() {

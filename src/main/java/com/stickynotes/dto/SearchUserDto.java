@@ -6,7 +6,6 @@ public class SearchUserDto {
 	private String name;
 	private boolean isPresent;
 	private String messege;
-	private String password;
 	
 	public String getUserid() {
 		return userid;
@@ -32,12 +31,5 @@ public class SearchUserDto {
 	public void setMessege(String messege) {
 		this.messege = messege;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	
 }
