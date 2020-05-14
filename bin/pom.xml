@@ -32,6 +32,7 @@
 			<dependency>
 			    <groupId>mysql</groupId>
 			    <artifactId>mysql-connector-java</artifactId>
+			    <version>6.0.2</version>
 			</dependency>
 			
 			<dependency>
@@ -40,28 +41,8 @@
 			    <version>2.3.5</version>
 			</dependency>
 			
-			<dependency>
-    		<groupId>org.springframework.cloud</groupId>
-    		<artifactId>spring-cloud-starter-config</artifactId>
-   			 </dependency>
-   			 <!-- this dependency is added for load balancer ribbon -->
-			<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-</dependency>
 	</dependencies>
-	<!-- this dependency is added for cloud instance access -->
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Hoxton.SR4</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
