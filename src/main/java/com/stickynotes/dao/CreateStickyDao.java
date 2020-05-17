@@ -33,8 +33,8 @@ public class CreateStickyDao {
 		UserEntity userEntity  = optional.get();
 		StickyNotesEntity stickyNotesEntity = new StickyNotesEntity();
 		stickyNotesEntity.setUserEntity(userEntity);
-		stickyNotesEntity.setCreatedAt(new Date());
-		stickyNotesEntity.setUpdatedAt(new Date());
+		stickyNotesEntity.setCreatedDate(new Date());
+		stickyNotesEntity.setUpdatedDate(new Date());
 		stickyNotesEntity.setContent(stickyNotesPojo.getContent());
 		stickyNotesEntity.setIsActive(true);
 		

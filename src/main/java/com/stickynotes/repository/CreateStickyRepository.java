@@ -7,5 +7,5 @@ import com.stickynotes.entities.StickyNotesEntity;
 
 @Repository
 public interface CreateStickyRepository extends CrudRepository<StickyNotesEntity,String> {
-
+	
 }

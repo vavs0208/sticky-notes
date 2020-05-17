@@ -1,11 +1,12 @@
 package com.stickynotes.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name="user_vaibhav")
 public class UserEntity {
 	
 	public String getUserid() {
@@ -35,6 +36,7 @@ public class UserEntity {
 	
 
 	@Id
+	@Column(name = "user_id")
 	private String userid;
 	private String name;
 	private String email;

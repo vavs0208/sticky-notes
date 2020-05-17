@@ -2,26 +2,26 @@ package com.stickynotes.dto;
 
 import java.util.Date;
 
-public class StickyNotesDto {
+public class LabelDto {
 	
-	private String stickyNotesId;
-	private String content;
-	private Boolean isActive;
-    private Date createdDate;
-    private Date updatedDate;
-    
-    
-	public String getStickyNotesId() {
-		return stickyNotesId;
+	public String labelId;
+	public String labelName;
+	public Boolean isActive;
+	public Date createdDate;
+	public Date updatedDate;
+	
+	
+	public String getLabelId() {
+		return labelId;
 	}
-	public void setStickyNotesId(String stickyNotesId) {
-		this.stickyNotesId = stickyNotesId;
+	public void setLabelId(String labelId) {
+		this.labelId = labelId;
 	}
-	public String getContent() {
-		return content;
+	public String getLabelName() {
+		return labelName;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setLabelName(String labelName) {
+		this.labelName = labelName;
 	}
 	public Boolean getIsActive() {
 		return isActive;
@@ -41,4 +41,5 @@ public class StickyNotesDto {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+
 }
