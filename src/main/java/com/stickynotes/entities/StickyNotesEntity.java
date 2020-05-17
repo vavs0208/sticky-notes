@@ -21,7 +21,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="StickyNotes")
+@Table(name="sticky_notes")
 public class StickyNotesEntity {
 	
 	@Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
