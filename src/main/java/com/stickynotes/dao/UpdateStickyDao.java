@@ -45,10 +45,12 @@ public class UpdateStickyDao {
 				stickyNotesEntity.setContent(stickyNotesPojo.content);
 				stickyNotesEntity.setCreatedAt(StickyNotesEntity.getCreatedAt());
 				stickyNotesEntity.setUpdatedAt(new Date());
-				stickyNotesEntity.setIsActive(true);				
-					StickyNotesEntity stickyNotesEntityUpdated = createStickyRepository.save(stickyNotesEntity);					
-					ModelMapper modelMapper = new ModelMapper();		
-					modelMapper.map(stickyNotesEntityUpdated, stickyNotesDto);
+				stickyNotesEntity.setIsActive(true);		
+				int i = createStickyRepository.updateStickyNotesEntity(stickyNotesPojo.content, stickyNotesPojo.stickyNotesId, userEntity);
+//					StickyNotesEntity stickyNotesEntityUpdated = createStickyRepository.save(stickyNotesEntity);					
+//					ModelMapper modelMapper = new ModelMapper();		
+//					modelMapper.map(stickyNotesEntityUpdated, stickyNotesDto);
+				stickyNotesDto.setContent(""+i);
 			
 		}else {
 			stickyNotesDto.setContent("No note found to update, of stickyNotesId: "+stickyNotesPojo.stickyNotesId+" and user: "+stickyNotesPojo.userid);}
