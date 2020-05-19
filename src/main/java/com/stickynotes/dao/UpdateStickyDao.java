@@ -23,7 +23,7 @@ import com.stickynotes.repository.CreateStickyRepository;
 import com.stickynotes.repository.UserRepository;
 
 @Repository
-public class UpdateSticky {
+public class UpdateStickyDao {
 	
 	@Autowired
 	CreateStickyRepository createStickyRepository;
