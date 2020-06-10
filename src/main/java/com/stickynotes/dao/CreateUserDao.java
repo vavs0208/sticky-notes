@@ -33,6 +33,7 @@ public class CreateUserDao {
 		
 		UserEntity userEntity=new UserEntity();
 		ModelMapper modelMapper = new ModelMapper();
+		userPojo.setAdmin(true);
 		userPojo.setPassword(passwordEncoderMatcher.hashPassword(userPojo.getPassword()));
 		modelMapper.map(userPojo, userEntity);
 		

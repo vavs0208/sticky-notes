@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.stickynotes.dao.ChangeUserPasswordDao;
 import com.stickynotes.dto.SearchUserDto;
-import com.stickynotes.pojos.UserPojo;
+import com.stickynotes.pojos.PasswordResetPojo;
 
 @Service
 public class ChangeUserPasswordImpl implements ChangeUserPassword{
@@ -14,9 +14,9 @@ public class ChangeUserPasswordImpl implements ChangeUserPassword{
 	ChangeUserPasswordDao changeUserPasswordDao;
 	
 	@Override
-	public SearchUserDto changeUserPassword(UserPojo userPojo) {
+	public SearchUserDto changeUserPassword(PasswordResetPojo passwordResetPojo) {
 		
-		return changeUserPasswordDao.changeUserPassword(userPojo);
+		return changeUserPasswordDao.changeUserPassword(passwordResetPojo);
 	}
 
 }

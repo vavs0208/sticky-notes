@@ -23,6 +23,15 @@ public class UserPojo {
 	@Size(min=8, max=55)
 	private String password;
 	
+	private boolean isAdmin;
+	
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	public String getUserid() {
 		return userid;
 	}

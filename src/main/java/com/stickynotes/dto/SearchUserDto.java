@@ -4,9 +4,17 @@ public class SearchUserDto {
 
 	private String userid;
 	private String name;
+	private boolean isAdmin;
 	private boolean isPresent;
 	private String messege;
 	
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	public String getUserid() {
 		return userid;
 	}

@@ -1,5 +1,6 @@
 package com.stickynotes.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -38,12 +39,21 @@ public class UserEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
 
 	@Id
+	@Column(name="user_id",nullable=false)
 	private String userid;
 	private String name;
 	private String email;
 	private String country;
 	private String password;
+	@Column(name="is_admin")
+	private boolean isAdmin;
 }

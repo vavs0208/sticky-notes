@@ -2,6 +2,7 @@ package com.stickynotes.dto;
 
 import java.util.Date;
 
+
 public class StickyNotesDto {
 	
 	private String stickyNotesId;
@@ -9,8 +10,6 @@ public class StickyNotesDto {
 	private Boolean isActive;
     private Date createdAt;
     private Date updatedAt;
-    
-    
     
     
 	public String getStickyNotesId() {

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.stickynotes.dto.SearchUserDto;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.handler.UserNotFoundException;
-import com.stickynotes.pojos.UserPojo;
+import com.stickynotes.pojos.PasswordResetPojo;
 import com.stickynotes.readservice.PasswordEncoderMatcher;
 import com.stickynotes.repository.UserRepository;
 
@@ -28,36 +28,48 @@ public class ChangeUserPasswordDao {
 	@Autowired
 	Environment env;
 
-	public SearchUserDto changeUserPassword(UserPojo userPojo){
+	public SearchUserDto changeUserPassword(PasswordResetPojo passwordResetPojo){
 		SearchUserDto searchUserDto=new SearchUserDto();
-		String newPassword=userPojo.getPassword();
-		
-		Optional<UserEntity> user= userRepository.findById(userPojo.getUserid());
+		ModelMapper modelMapper=new ModelMapper();
+		modelMapper.map(passwordResetPojo, searchUserDto);
 		
 		try {
-			if(user.isPresent()){
-				UserEntity userEntity= user.get();
-				ModelMapper modelMapper= new ModelMapper();
-				modelMapper.map(userEntity, userPojo);
+			if(passwordResetPojo.getPassword().equals(passwordResetPojo.getNewPassword())){
+				//String password=userRepository.findUserDetails(passwordResetPojo.getUserid());
+				Optional<UserEntity> optional=userRepository.findById(passwordResetPojo.getUserid());
 				
-				if(passwordEncoderMatcher.match(newPassword, userPojo.getPassword())){
-					modelMapper.map(userPojo, searchUserDto);
-					searchUserDto.setPresent(true);
-					searchUserDto.setMessege(env.getProperty("samepassword"));
-					return searchUserDto;
+				if(optional.isPresent()){
+					UserEntity userEntity= optional.get();
+					String password=userEntity.getPassword();
+					if(passwordEncoderMatcher.match(passwordResetPojo.getOldPassword(), password)){
+					
+						if(passwordEncoderMatcher.match(passwordResetPojo.getPassword(), password)){
+							searchUserDto.setPresent(true);
+							searchUserDto.setMessege(env.getProperty("samepassword"));
+							return searchUserDto;
+						}
+						
+						passwordResetPojo.setPassword(passwordEncoderMatcher.hashPassword(passwordResetPojo.getPassword()));
+						modelMapper.map(passwordResetPojo, userEntity);
+						
+						UserEntity userEntityNew=userRepository.save(userEntity);
+						modelMapper.map(userEntityNew, searchUserDto);
+						
+						searchUserDto.setPresent(true);
+						searchUserDto.setMessege(env.getProperty("changepassword"));
+					}
+					else{
+						searchUserDto.setPresent(true);
+						searchUserDto.setMessege(env.getProperty("notsameoldpassword"));
+					}
 				}
-				
-				userPojo.setPassword(passwordEncoderMatcher.hashPassword(newPassword));
-				modelMapper.map(userPojo, userEntity);
-				
-				UserEntity userEntityNew=userRepository.save(userEntity);
-				modelMapper.map(userEntityNew, searchUserDto);
-				
-				searchUserDto.setPresent(true);
-				searchUserDto.setMessege(env.getProperty("changepassword"));
+				else{
+					throw new UserNotFoundException(env.getProperty("usernotfound"));
+				}
 			}
 			else{
-				throw new UserNotFoundException(env.getProperty("usernotfound"));
+				searchUserDto.setPresent(true);
+				searchUserDto.setMessege(env.getProperty("notsamenewpassword"));
 			}
 			
 		}catch (UserNotFoundException e) {

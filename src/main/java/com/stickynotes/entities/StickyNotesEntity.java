@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,38 +20,52 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="StickyNotes")
+@Table(name="sticky_notes_vaibhav")
 public class StickyNotesEntity {
 	
-	@Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	private Long stickyNotesId;
+	@Id 
+	@Column(name="sticky_notes_id")
+	private String stickyNotesId;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
 	private UserEntity userEntity;
 	
 	private String content;
+	
+	@Column(name="is_active")
 	private Boolean isActive;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_date", nullable = false)
     @LastModifiedDate
     private Date updatedAt;
 
-	
+    @ManyToOne(optional = false)
+    @JoinColumn(name="project_id", nullable=false)
+	private ProjectStickyEntity projectStickyEntity;
 
-	public Long getStickyNotesId() {
+    
+	public ProjectStickyEntity getProjectStickyEntity() {
+		return projectStickyEntity;
+	}
+
+	public void setProjectStickyEntity(ProjectStickyEntity projectStickyEntity) {
+		this.projectStickyEntity = projectStickyEntity;
+	}
+
+	public String getStickyNotesId() {
 		return stickyNotesId;
 	}
 
-	public void setStickyNotesId(Long stickyNotesId) {
+	public void setStickyNotesId(String stickyNotesId) {
 		this.stickyNotesId = stickyNotesId;
 	}
 

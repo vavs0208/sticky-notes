@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stickynotes.dto.SearchUserDto;
+import com.stickynotes.entities.ProjectStickyEntity;
+import com.stickynotes.entities.StickyNotesEntity;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.pojos.UserPojo;
+import com.stickynotes.repository.CreateProjectRepository;
+import com.stickynotes.repository.CreateStickyRepository;
 import com.stickynotes.repository.UserRepository;
 import com.stickynotes.services.UserLoginAuthentictionService;
 
@@ -50,5 +54,43 @@ public class ReadController {
 		return new ResponseEntity<SearchUserDto>(userLoginAuthentictionService.getLoginUserDetails(userRecord),HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteUser() {
+		
+		userRepository.deleteAll();
+		return "Done";
+	}
+	
+	@Autowired
+	CreateProjectRepository createProjectRepository;
+	
+	@RequestMapping(value = "/deleteProject", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteProject() {
+		
+		createProjectRepository.deleteAll();
+		return "Done";
+	}
+	
+	
+	@RequestMapping(value = "/getProject", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ProjectStickyEntity> getProject() {
+		List<ProjectStickyEntity> proj = new ArrayList<ProjectStickyEntity>();
+		createProjectRepository.findAll().forEach(proj::add);
+		return proj;
+	}
+	
+	@Autowired
+	CreateStickyRepository createStickyRepository;
+	
+	@RequestMapping(value = "/getStickyt", method = RequestMethod.GET)
+	@ResponseBody
+	public List<StickyNotesEntity> getSticky() {
+		List<StickyNotesEntity> sticky = new ArrayList<StickyNotesEntity>();
+		createStickyRepository.findAll().forEach(sticky::add);
+		return sticky;
+	}
 }
 	

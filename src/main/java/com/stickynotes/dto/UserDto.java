@@ -7,7 +7,15 @@ public class UserDto {
 	private String email;
 	private String country;
 	private String password;
+	private boolean isAdmin;
 	
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	public String getUserid() {
 		return userid;
 	}
