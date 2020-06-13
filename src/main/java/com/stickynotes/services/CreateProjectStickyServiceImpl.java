@@ -13,6 +13,9 @@ public class CreateProjectStickyServiceImpl implements CreateProjectStickyServic
 	@Autowired
 	CreateProjectStickyDao createProjectStickyDao;
 	
+	/*
+	 * @see com.stickynotes.dao.CreateProjectStickyDao #createProjectSticky(com.stickynotes.pojos.ProjectStickyPojo)
+	 */
 	@Override
 	public ProjectStickyDto createProjectSticky(ProjectStickyPojo projectStickyPojo) {
 		

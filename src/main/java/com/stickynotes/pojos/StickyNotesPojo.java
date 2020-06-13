@@ -2,6 +2,9 @@ package com.stickynotes.pojos;
 
 import java.util.Date;
 
+/*
+ * This class is being used to transfer the form data related to StickyNote from the controller method to dao layer.
+ */
 public class StickyNotesPojo {
 	
 	public String stickyNotesId;

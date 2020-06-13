@@ -2,6 +2,9 @@ package com.stickynotes.handler;
 
 import java.util.Date;
 
+/*
+ * This class defines the format of the Exception message.
+ */
 public class ExceptionResponse {
 
 	private Date timestamp;

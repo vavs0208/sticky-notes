@@ -13,6 +13,9 @@ public class UserLoginAuthentictionServiceImpl implements UserLoginAuthentiction
 	@Autowired
 	UserLoginAuthenticationDao userLoginAuthenticationDao;
 	
+	/*
+	 * @see com.stickynotes.dao.UserLoginAuthenticationDao #getLoginUserDetails(com.stickynotes.pojos.UserPojo)
+	 */
 	@Override
 	public SearchUserDto getLoginUserDetails(UserPojo userPojo) {
 		

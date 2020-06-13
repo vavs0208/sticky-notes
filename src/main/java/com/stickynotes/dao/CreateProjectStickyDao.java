@@ -13,6 +13,9 @@ import com.stickynotes.entities.ProjectStickyEntity;
 import com.stickynotes.pojos.ProjectStickyPojo;
 import com.stickynotes.repository.CreateProjectRepository;
 
+/*
+ * This class is to create connection with the database and save the required entity. 
+ */
 @Repository
 @PropertySource(value="content.properties")
 public class CreateProjectStickyDao {
@@ -23,6 +26,12 @@ public class CreateProjectStickyDao {
 	@Autowired
 	Environment env;
 	
+	/*
+	 * This method implements the actual logic to create a new project.
+	 * @see 
+	 * Parameter com.stickynotes.pojos.ProjectStickyPojo
+	 * Return    com.stickynotes.dto.ProjectStickyDto
+	 */
 	public ProjectStickyDto createProjectSticky(ProjectStickyPojo projectStickyPojo){
 		
 		ProjectStickyDto projectStickyDto=new ProjectStickyDto();

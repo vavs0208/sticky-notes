@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ * This class is being used as an entity to create new User and persist in the database.
+ */
 @Entity
 @Table(name="user")
 public class UserEntity {

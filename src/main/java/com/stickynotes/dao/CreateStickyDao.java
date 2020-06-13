@@ -16,6 +16,9 @@ import com.stickynotes.repository.CreateProjectRepository;
 import com.stickynotes.repository.CreateStickyRepository;
 import com.stickynotes.repository.UserRepository;
 
+/*
+ * This class is to create connection with the database and save the required entity.
+ */
 @Repository
 public class CreateStickyDao {
 	
@@ -28,6 +31,12 @@ public class CreateStickyDao {
 	@Autowired
 	CreateProjectRepository createProjectRepository;
 
+	/*
+	 * This method implements the actual logic to create a new Sticky Note.
+	 * @see 
+	 * Parameter com.stickynotes.pojos.StickyNotesPojo
+	 * Return    com.stickynotes.dto.StickyNotesDto
+	 */
 	public StickyNotesDto createStickyNotes(StickyNotesPojo stickyNotesPojo) {
 		
 		Optional<UserEntity> optional = userRepository.findById(stickyNotesPojo.userid);
@@ -37,7 +46,7 @@ public class CreateStickyDao {
 		StickyNotesEntity stickyNotesEntity = new StickyNotesEntity();
 		stickyNotesEntity.setStickyNotesId(stickyNotesPojo.getStickyNotesId());
 		stickyNotesEntity.setUserEntity(userEntity);
-		stickyNotesEntity.setCreatedAt(new Date());
+		stickyNotesEntity.setCreatedDate(new Date());
 		stickyNotesEntity.setUpdatedAt(new Date());
 		stickyNotesEntity.setContent(stickyNotesPojo.getContent());
 		stickyNotesEntity.setIsActive(true);

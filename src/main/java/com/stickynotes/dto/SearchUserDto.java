@@ -1,5 +1,9 @@
 package com.stickynotes.dto;
 
+/*
+ * This class is being used to transfer the results of authentication of login user functionality to the controller 
+ * method from dao layer.
+ */
 public class SearchUserDto {
 
 	private String userid;

@@ -15,6 +15,10 @@ import com.stickynotes.pojos.PasswordResetPojo;
 import com.stickynotes.readservice.PasswordEncoderMatcher;
 import com.stickynotes.repository.UserRepository;
 
+/*
+ * This class is to create connection with the database and save the required entity.  
+ */
+
 @Repository
 @PropertySource(value="content.properties")
 public class ChangeUserPasswordDao {
@@ -28,6 +32,12 @@ public class ChangeUserPasswordDao {
 	@Autowired
 	Environment env;
 
+	/*
+	 * This method implements the actual logic to change the login user password.
+	 * @see 
+	 * Parameter com.stickynotes.pojos.PasswordResetPojo
+	 * Return    com.stickynotes.dto.SearchUserDto
+	 */
 	public SearchUserDto changeUserPassword(PasswordResetPojo passwordResetPojo){
 		SearchUserDto searchUserDto=new SearchUserDto();
 		ModelMapper modelMapper=new ModelMapper();

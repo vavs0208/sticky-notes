@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stickynotes.dto.SearchUserDto;
-import com.stickynotes.entities.ProjectStickyEntity;
-import com.stickynotes.entities.StickyNotesEntity;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.pojos.UserPojo;
-import com.stickynotes.repository.CreateProjectRepository;
-import com.stickynotes.repository.CreateStickyRepository;
 import com.stickynotes.repository.UserRepository;
 import com.stickynotes.services.UserLoginAuthentictionService;
 
+/*
+ * This class provides control for all the GET services 
+ */
 @RestController
 public class ReadController {
 	
@@ -32,21 +31,32 @@ public class ReadController {
 	@Autowired
 	UserLoginAuthentictionService userLoginAuthentictionService;
 	
+	/*
+	 * This method checks the health of the application
+	 */
 	@RequestMapping(value = "/health", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> health() {
 			String serverStatus = " All OK";
 			return new ResponseEntity<String>(serverStatus,HttpStatus.OK);
-		}
+	}
 	
+	/*
+	 * This method fetch all the user details
+	 * @see com.stickynotes.repository.UserRepository#findAll()
+	 */
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UserEntity> getAllUserNames() {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 		userRepository.findAll().forEach(users::add);
 		return users;
-		}
+	}
 	
+	/*
+	 * This method controls the authentication of the Login user 
+	 * @see com.stickynotes.services.UserLoginAuthentictionService #getLoginUserDetails(com.stickynotes.pojos.UserPojo)
+	 */
 	@RequestMapping(value = "/getLoginUsers", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<SearchUserDto> getLoginUserDetails(@Valid @RequestBody UserPojo userRecord) {
@@ -54,43 +64,5 @@ public class ReadController {
 		return new ResponseEntity<SearchUserDto>(userLoginAuthentictionService.getLoginUserDetails(userRecord),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
-	@ResponseBody
-	public String deleteUser() {
-		
-		userRepository.deleteAll();
-		return "Done";
-	}
-	
-	@Autowired
-	CreateProjectRepository createProjectRepository;
-	
-	@RequestMapping(value = "/deleteProject", method = RequestMethod.GET)
-	@ResponseBody
-	public String deleteProject() {
-		
-		createProjectRepository.deleteAll();
-		return "Done";
-	}
-	
-	
-	@RequestMapping(value = "/getProject", method = RequestMethod.GET)
-	@ResponseBody
-	public List<ProjectStickyEntity> getProject() {
-		List<ProjectStickyEntity> proj = new ArrayList<ProjectStickyEntity>();
-		createProjectRepository.findAll().forEach(proj::add);
-		return proj;
-	}
-	
-	@Autowired
-	CreateStickyRepository createStickyRepository;
-	
-	@RequestMapping(value = "/getStickyt", method = RequestMethod.GET)
-	@ResponseBody
-	public List<StickyNotesEntity> getSticky() {
-		List<StickyNotesEntity> sticky = new ArrayList<StickyNotesEntity>();
-		createStickyRepository.findAll().forEach(sticky::add);
-		return sticky;
-	}
 }
 	

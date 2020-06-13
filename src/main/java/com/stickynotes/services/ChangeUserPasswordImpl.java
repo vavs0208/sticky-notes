@@ -13,6 +13,9 @@ public class ChangeUserPasswordImpl implements ChangeUserPassword{
 	@Autowired
 	ChangeUserPasswordDao changeUserPasswordDao;
 	
+	/*
+	 * @see com.stickynotes.dao.ChangeUserPasswordDao #changeUserPassword(com.stickynotes.pojos.PasswordResetPojo)
+	 */
 	@Override
 	public SearchUserDto changeUserPassword(PasswordResetPojo passwordResetPojo) {
 		

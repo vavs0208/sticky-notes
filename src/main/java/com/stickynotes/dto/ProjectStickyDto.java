@@ -2,6 +2,9 @@ package com.stickynotes.dto;
 
 import java.util.Date;
 
+/*
+ * This class is being used to transfer the results of certain functionality related to 'Project' to the controller method from dao layer.
+ */
 public class ProjectStickyDto {
 
 	private String projectID;

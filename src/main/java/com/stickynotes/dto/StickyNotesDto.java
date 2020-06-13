@@ -2,13 +2,16 @@ package com.stickynotes.dto;
 
 import java.util.Date;
 
-
+/*
+ * This class is being used to transfer the results of certain functionality related to 'StickyNotes' module to the controller 
+ * method from dao layer.
+ */
 public class StickyNotesDto {
 	
 	private String stickyNotesId;
 	private String content;
 	private Boolean isActive;
-    private Date createdAt;
+    private Date createdDate;
     private Date updatedAt;
     
     
@@ -30,11 +33,11 @@ public class StickyNotesDto {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	public Date getCreatedAt() {
-		return createdAt;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 	public Date getUpdatedAt() {
 		return updatedAt;

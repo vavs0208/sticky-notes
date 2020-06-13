@@ -6,6 +6,9 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.context.annotation.PropertySource;
 
+/*
+ * This class is being used to transfer the form data related to Project from the controller method to dao layer.
+ */
 @PropertySource(value="content.properties")
 public class ProjectStickyPojo {
 

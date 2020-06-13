@@ -4,14 +4,24 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+
+/*
+ * This class is being used as an entity to create new Project and persist in the database.
+ */
 @Entity
 @Table(name="sticky_project")
 public class ProjectStickyEntity {
 
 	@Id
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid",strategy="uuid")
+	@ColumnDefault("2001")
 	@Column(name="project_id",nullable=false)
 	private String projectID;
 	

@@ -15,6 +15,9 @@ import com.stickynotes.pojos.UserPojo;
 import com.stickynotes.readservice.PasswordEncoderMatcher;
 import com.stickynotes.repository.UserRepository;
 
+/*
+ * This class is to create connection with the database and save the required entity.
+ */
 @Repository
 @PropertySource(value="content.properties")
 public class UserLoginAuthenticationDao {
@@ -28,6 +31,12 @@ public class UserLoginAuthenticationDao {
 	@Autowired
 	Environment env;
 
+	/*
+	 * This method implements the actual logic to authenticate a login user details.
+	 * @see 
+	 * Parameter com.stickynotes.pojos.UserPojo
+	 * Return    com.stickynotes.dto.SearchUserDto
+	 */
 	public SearchUserDto getLoginUserDetails(UserPojo userRecord) {
 		
 		SearchUserDto searchUserDto= new SearchUserDto();

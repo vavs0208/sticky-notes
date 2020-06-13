@@ -1,5 +1,9 @@
 package com.stickynotes.dto;
 
+/*
+ * This class is being used to transfer the results of certain functionality related to 'User' module to the controller 
+ * method from dao layer.
+ */
 public class UserDto {
 
 	private String userid;

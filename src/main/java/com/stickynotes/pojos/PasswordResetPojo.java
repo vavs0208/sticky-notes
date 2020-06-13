@@ -5,6 +5,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.PropertySource;
 
+/*
+ * This class is being used to transfer the form data of functionality related to User password reset from the controller method to dao layer.
+ */
 @PropertySource(value="content.properties")
 public class PasswordResetPojo {
 
