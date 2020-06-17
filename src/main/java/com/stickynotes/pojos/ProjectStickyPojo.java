@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value="content.properties")
 public class ProjectStickyPojo {
 
-	@NotBlank(message="{projectidvalidation}")
+	//@NotBlank(message="{projectidvalidation}")
 	private String projectID;
 	
 	@NotBlank(message="{userIdvalidation}")

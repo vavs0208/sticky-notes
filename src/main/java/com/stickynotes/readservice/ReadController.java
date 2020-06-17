@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stickynotes.dto.SearchUserDto;
+import com.stickynotes.dto.UserDto;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.pojos.UserPojo;
 import com.stickynotes.repository.UserRepository;
 import com.stickynotes.services.UserLoginAuthentictionService;
+import com.stickynotes.validation.ExceptionResponse;
+import com.stickynotes.validation.UserValidation;
 
 /*
  * This class provides control for all the GET services 
@@ -59,9 +61,14 @@ public class ReadController {
 	 */
 	@RequestMapping(value = "/getLoginUsers", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<SearchUserDto> getLoginUserDetails(@Valid @RequestBody UserPojo userRecord) {
+	public ResponseEntity<?> getLoginUserDetails(@Valid @RequestBody UserPojo userPojo) {
 		
-		return new ResponseEntity<SearchUserDto>(userLoginAuthentictionService.getLoginUserDetails(userRecord),HttpStatus.OK);
+		ExceptionResponse exceptionResponse= UserValidation.LoginUserValidation(userPojo);
+		if(exceptionResponse.getStatus()==false){
+			return new ResponseEntity<Object>(exceptionResponse,HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<UserDto>(userLoginAuthentictionService.getLoginUserDetails(userPojo),HttpStatus.OK);
 	}
 	
 }

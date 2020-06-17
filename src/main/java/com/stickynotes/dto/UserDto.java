@@ -1,17 +1,16 @@
 package com.stickynotes.dto;
 
 /*
- * This class is being used to transfer the results of certain functionality related to 'User' module to the controller 
+ * This class is being used to transfer the results of authentication of login user functionality to the controller 
  * method from dao layer.
  */
 public class UserDto {
 
 	private String userid;
 	private String name;
-	private String email;
-	private String country;
-	private String password;
 	private boolean isAdmin;
+	private boolean isPresent;
+	private String messege;
 	
 	
 	public boolean isAdmin() {
@@ -32,23 +31,17 @@ public class UserDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
-		return email;
+	public boolean isPresent() {
+		return isPresent;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPresent(boolean isPresent) {
+		this.isPresent = isPresent;
 	}
-	public String getCountry() {
-		return country;
+	public String getMessege() {
+		return messege;
 	}
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMessege(String messege) {
+		this.messege = messege;
 	}
 	
 }

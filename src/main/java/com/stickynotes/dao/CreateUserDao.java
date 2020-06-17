@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
-import com.stickynotes.dto.SearchUserDto;
+import com.stickynotes.dto.UserDto;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.pojos.UserPojo;
 import com.stickynotes.readservice.PasswordEncoderMatcher;
@@ -33,11 +33,11 @@ public class CreateUserDao {
 	 * This method implements the actual logic to create a new User.
 	 * @see 
 	 * Parameter com.stickynotes.pojos.UserPojo
-	 * Return    com.stickynotes.dto.SearchUserDto
+	 * Return    com.stickynotes.dto.UserPojo
 	 */
-	public SearchUserDto createUser(UserPojo userPojo){
+	public UserDto createUser(UserPojo userPojo){
 		
-		SearchUserDto searchUserDto=new SearchUserDto();
+		UserDto userDto=new UserDto();
 		
 		UserEntity userEntity=new UserEntity();
 		ModelMapper modelMapper = new ModelMapper();
@@ -47,12 +47,12 @@ public class CreateUserDao {
 		
 		UserEntity userEntityNew=userRepository.save(userEntity);
 		
-		modelMapper.map(userEntityNew, searchUserDto);
+		modelMapper.map(userEntityNew, userDto);
 		
-		searchUserDto.setPresent(true);
-		searchUserDto.setMessege(env.getProperty("usercreated"));
+		userDto.setPresent(true);
+		userDto.setMessege(env.getProperty("usercreated"));
 		
-		return searchUserDto;
+		return userDto;
 	}
 	
 }

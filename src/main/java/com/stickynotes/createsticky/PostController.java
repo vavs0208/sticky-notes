@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.stickynotes.dto.ProjectStickyDto;
-import com.stickynotes.dto.SearchUserDto;
+import com.stickynotes.dto.UserDto;
 import com.stickynotes.dto.StickyNotesDto;
-import com.stickynotes.pojos.PasswordResetPojo;
 import com.stickynotes.pojos.ProjectStickyPojo;
 import com.stickynotes.pojos.StickyNotesPojo;
 import com.stickynotes.pojos.UserPojo;
@@ -22,6 +21,8 @@ import com.stickynotes.services.ChangeUserPassword;
 import com.stickynotes.services.CreateProjectStickyService;
 import com.stickynotes.services.CreateStickyNotesService;
 import com.stickynotes.services.CreateUserService;
+import com.stickynotes.validation.ExceptionResponse;
+import com.stickynotes.validation.UserValidation;
 
 /*
  * This class controls all the POST services. 
@@ -59,20 +60,30 @@ public class PostController {
 	 */
 	@RequestMapping(value="/addUser", method=RequestMethod.POST, headers="Accept=application/json")
 	@ResponseBody
-	public ResponseEntity<SearchUserDto> createUser(@Valid @RequestBody UserPojo userPojo){
+	public ResponseEntity<?> createUser(@RequestBody UserPojo userPojo){
 		
-		return new ResponseEntity<SearchUserDto>(createUserService.createUser(userPojo),HttpStatus.OK);
+		ExceptionResponse exceptionResponse= UserValidation.createUserValidation(userPojo);
+		if(exceptionResponse.getStatus()==false){
+			return new ResponseEntity<Object>(exceptionResponse,HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<UserDto>(createUserService.createUser(userPojo),HttpStatus.OK);
 	}
 	
 	/*
 	 * If any user need to change or reset the login password then this method controls that
-	 * @see com.stickynotes.services.ChangeUserPassword #changeUserPassword(com.stickynotes.pojos.PasswordResetPojo)
+	 * @see com.stickynotes.services.ChangeUserPassword #changeUserPassword(com.stickynotes.pojos.UserPojo)
 	 */
 	@RequestMapping(value="/resetPassword", method=RequestMethod.POST, headers="Accept=application/json")
 	@ResponseBody
-	public ResponseEntity<SearchUserDto> changeUserPassword(@Valid @RequestBody PasswordResetPojo passwordResetPojo){
+	public ResponseEntity<?> changeUserPassword(@Valid @RequestBody UserPojo userPojo){
 		
-		return new ResponseEntity<SearchUserDto>(changeUserPassword.changeUserPassword(passwordResetPojo),HttpStatus.OK);
+		ExceptionResponse exceptionResponse= UserValidation.ChangeUserPasswordValidation(userPojo);
+		if(exceptionResponse.getStatus()==false){
+			return new ResponseEntity<Object>(exceptionResponse,HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<UserDto>(changeUserPassword.changeUserPassword(userPojo),HttpStatus.OK);
 	}
 	
 	/*

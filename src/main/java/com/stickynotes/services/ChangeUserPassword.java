@@ -1,12 +1,12 @@
 package com.stickynotes.services;
 
-import com.stickynotes.dto.SearchUserDto;
-import com.stickynotes.pojos.PasswordResetPojo;
+import com.stickynotes.dto.UserDto;
+import com.stickynotes.pojos.UserPojo;
 
 public interface ChangeUserPassword {
 
 	/*
-	 * @see com.stickynotes.services.ChangeUserPasswordImpl #changeUserPassword(com.stickynotes.pojos.PasswordResetPojo)
+	 * @see com.stickynotes.services.ChangeUserPasswordImpl #changeUserPassword(com.stickynotes.pojos.UserPojo)
 	 */
-	public SearchUserDto changeUserPassword(PasswordResetPojo passwordResetPojo);
+	public UserDto changeUserPassword(UserPojo userPojo);
 }

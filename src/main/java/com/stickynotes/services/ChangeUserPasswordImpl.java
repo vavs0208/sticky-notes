@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stickynotes.dao.ChangeUserPasswordDao;
-import com.stickynotes.dto.SearchUserDto;
-import com.stickynotes.pojos.PasswordResetPojo;
+import com.stickynotes.dto.UserDto;
+import com.stickynotes.pojos.UserPojo;
 
 @Service
 public class ChangeUserPasswordImpl implements ChangeUserPassword{
@@ -14,12 +14,12 @@ public class ChangeUserPasswordImpl implements ChangeUserPassword{
 	ChangeUserPasswordDao changeUserPasswordDao;
 	
 	/*
-	 * @see com.stickynotes.dao.ChangeUserPasswordDao #changeUserPassword(com.stickynotes.pojos.PasswordResetPojo)
+	 * @see com.stickynotes.dao.ChangeUserPasswordDao #changeUserPassword(com.stickynotes.pojos.UserPojo)
 	 */
 	@Override
-	public SearchUserDto changeUserPassword(PasswordResetPojo passwordResetPojo) {
+	public UserDto changeUserPassword(UserPojo userPojo) {
 		
-		return changeUserPasswordDao.changeUserPassword(passwordResetPojo);
+		return changeUserPasswordDao.changeUserPassword(userPojo);
 	}
 
 }

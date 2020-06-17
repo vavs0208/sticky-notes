@@ -1,4 +1,4 @@
-package com.stickynotes.handler;
+package com.stickynotes.validation;
 
 import java.util.Date;
 
@@ -9,14 +9,14 @@ public class ExceptionResponse {
 
 	private Date timestamp;
 	private String message;
-	private String details;
+	private Boolean status;
 	
-	public ExceptionResponse(Date timestamp, String message, String details) 
+	public ExceptionResponse(Date timestamp, String message, Boolean status) 
 	{
 		super();
 		this.timestamp = timestamp;
 		this.message = message;
-		this.details = details;
+		this.status = status;
 	}
 	public Date getTimestamp() 
 	{
@@ -26,8 +26,8 @@ public class ExceptionResponse {
 	{
 		return message;
 	}
-	public String getDetails()
+	public Boolean getStatus()
 	{
-		return details;
+		return status;
 	}
 }

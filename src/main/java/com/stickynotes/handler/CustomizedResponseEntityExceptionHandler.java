@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.stickynotes.validation.ExceptionResponse;
+
 /*
  * This class is being used to handled all types of Exception.
  */
@@ -26,7 +28,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request)  
 	{  
 	 
-		ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));  
+		ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), ex.getMessage(), false);  
 		
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);  
 	}  
@@ -38,7 +40,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	public final ResponseEntity<Object> handleUserNotFoundExceptions(UserNotFoundException ex, WebRequest request)  
 	{  
 	  
-		ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));  
+		ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), ex.getMessage(), false);  
 		  
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.NOT_FOUND);  
 	}  
@@ -49,7 +51,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	@Override  
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request)   
 	{  
-		ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), "Validation Failed", ex.getBindingResult().toString());  
+		ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), ex.getBindingResult().toString(), false);  
 		   
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);  
 	} 

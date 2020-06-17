@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
-import com.stickynotes.dto.SearchUserDto;
+import com.stickynotes.dto.UserDto;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.handler.UserNotFoundException;
 import com.stickynotes.pojos.UserPojo;
@@ -35,11 +35,11 @@ public class UserLoginAuthenticationDao {
 	 * This method implements the actual logic to authenticate a login user details.
 	 * @see 
 	 * Parameter com.stickynotes.pojos.UserPojo
-	 * Return    com.stickynotes.dto.SearchUserDto
+	 * Return    com.stickynotes.dto.userDto
 	 */
-	public SearchUserDto getLoginUserDetails(UserPojo userRecord) {
+	public UserDto getLoginUserDetails(UserPojo userRecord) {
 		
-		SearchUserDto searchUserDto= new SearchUserDto();
+		UserDto userDto= new UserDto();
 		Optional<UserEntity> user= userRepository.findById(userRecord.getUserid());
 		
 		try {
@@ -49,15 +49,15 @@ public class UserLoginAuthenticationDao {
 				userEntity=user.get();
 				
 				ModelMapper modelMapper = new ModelMapper();
-				modelMapper.map(userEntity, searchUserDto);
+				modelMapper.map(userEntity, userDto);
 				
 				if(passwordEncoderMatcher.match(userRecord.getPassword(), userEntity.getPassword())){
-					searchUserDto.setPresent(true);
-					searchUserDto.setMessege(env.getProperty("uservalid"));
+					userDto.setPresent(true);
+					userDto.setMessege(env.getProperty("uservalid"));
 				}
 				else{
-					searchUserDto.setPresent(false);
-					searchUserDto.setMessege(env.getProperty("usernotvalid"));
+					userDto.setPresent(false);
+					userDto.setMessege(env.getProperty("usernotvalid"));
 				}
 			}
 			else{
@@ -71,6 +71,6 @@ public class UserLoginAuthenticationDao {
 			
 		}
 		
-		return searchUserDto;
+		return userDto;
 	}
 }
