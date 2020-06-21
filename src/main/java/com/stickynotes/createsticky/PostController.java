@@ -63,7 +63,7 @@ public class PostController {
 	public ResponseEntity<?> createUser(@RequestBody UserPojo userPojo){
 		
 		ExceptionResponse exceptionResponse= UserValidation.createUserValidation(userPojo);
-		if(exceptionResponse.getStatus()==false){
+		if(!exceptionResponse.getStatus()){
 			return new ResponseEntity<Object>(exceptionResponse,HttpStatus.BAD_REQUEST);
 		}
 		
@@ -76,10 +76,10 @@ public class PostController {
 	 */
 	@RequestMapping(value="/resetPassword", method=RequestMethod.POST, headers="Accept=application/json")
 	@ResponseBody
-	public ResponseEntity<?> changeUserPassword(@Valid @RequestBody UserPojo userPojo){
+	public ResponseEntity<?> changeUserPassword(@RequestBody UserPojo userPojo){
 		
 		ExceptionResponse exceptionResponse= UserValidation.ChangeUserPasswordValidation(userPojo);
-		if(exceptionResponse.getStatus()==false){
+		if(!exceptionResponse.getStatus()){
 			return new ResponseEntity<Object>(exceptionResponse,HttpStatus.BAD_REQUEST);
 		}
 		

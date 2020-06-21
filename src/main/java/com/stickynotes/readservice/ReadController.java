@@ -2,8 +2,6 @@ package com.stickynotes.readservice;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.stickynotes.dto.UserDto;
 import com.stickynotes.entities.UserEntity;
 import com.stickynotes.pojos.UserPojo;
@@ -61,10 +58,10 @@ public class ReadController {
 	 */
 	@RequestMapping(value = "/getLoginUsers", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> getLoginUserDetails(@Valid @RequestBody UserPojo userPojo) {
+	public ResponseEntity<?> getLoginUserDetails(@RequestBody UserPojo userPojo) {
 		
 		ExceptionResponse exceptionResponse= UserValidation.LoginUserValidation(userPojo);
-		if(exceptionResponse.getStatus()==false){
+		if(!exceptionResponse.getStatus()){
 			return new ResponseEntity<Object>(exceptionResponse,HttpStatus.BAD_REQUEST);
 		}
 		

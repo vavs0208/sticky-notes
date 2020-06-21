@@ -44,8 +44,6 @@ public class ChangeUserPasswordDao {
 		modelMapper.map(userPojo, userDto);
 		
 		try {
-			if(userPojo.getPassword().equals(userPojo.getNewPassword())){
-				//String password=userRepository.findUserDetails(passwordResetPojo.getUserid());
 				Optional<UserEntity> optional=userRepository.findById(userPojo.getUserid());
 				
 				if(optional.isPresent()){
@@ -59,14 +57,17 @@ public class ChangeUserPasswordDao {
 							return userDto;
 						}
 						
-						userEntity.setPassword(passwordEncoderMatcher.hashPassword(userPojo.getPassword()));
-						//modelMapper.map(userPojo, userEntity);
+						modelMapper.map(userEntity, userDto);
+						int userEntityNew=userRepository.updateUserPassword(passwordEncoderMatcher.hashPassword(userPojo.getPassword()), userPojo.getUserid());
 						
-						UserEntity userEntityNew=userRepository.save(userEntity);
-						modelMapper.map(userEntityNew, userDto);
-						
-						userDto.setPresent(true);
-						userDto.setMessege(env.getProperty("changepassword"));
+						if(userEntityNew>0){
+							userDto.setPresent(true);
+							userDto.setMessege(env.getProperty("changepassword"));
+						}
+						else{
+							userDto.setPresent(true);
+							userDto.setMessege(env.getProperty("notchangepassword"));
+						}
 					}
 					else{
 						userDto.setPresent(true);
@@ -76,17 +77,15 @@ public class ChangeUserPasswordDao {
 				else{
 					throw new UserNotFoundException(env.getProperty("usernotfound"));
 				}
-			}
-			else{
-				userDto.setPresent(true);
-				userDto.setMessege(env.getProperty("notsamenewpassword"));
-			}
-			
+				
 		}catch (UserNotFoundException e) {
 			throw new UserNotFoundException(env.getProperty("usernotfound"));
 			
 		}catch (Exception e) {
-			return null;
+			userDto.setPresent(true);
+			userDto.setMessege(e.getMessage());
+			
+			return userDto;
 		}
 		
 		return userDto;
