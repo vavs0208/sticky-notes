@@ -37,12 +37,12 @@ public class StickyNotesEntity {
 	private Boolean is_active;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_date", nullable = false)
     @LastModifiedDate
     private Date updatedAt;
 

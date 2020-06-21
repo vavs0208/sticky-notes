@@ -1,5 +1,6 @@
 package com.stickynotes.repository;
 
+import java.sql.Date;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,10 +23,8 @@ public Optional<StickyNotesEntity> findByUserEntityAndStickyNotesId(UserEntity u
 @Modifying	
 public int updateStickyNotesEntity(String content, String stickyNotesId);
 
-//@Transactional
-//@Query("update StickyNotesEntity stickyNotes set stickyNotes.content=?1 where stickyNotes.sticky_notes_id=?2 and stickyNotes.userEntity=?3")
-//@Modifying
-//
-//public int updateStickyNotesEntity(String content, String stickyNotesId, UserEntity userEntitys);
+
+@Query("select stickyNotes from StickyNotesEntity stickyNotes where stickyNotes.createdAt >?1")
+public Iterable<StickyNotesEntity> fetchStickyNotesEntity(Date createdAt);
 
 }
