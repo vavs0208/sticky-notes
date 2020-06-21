@@ -9,7 +9,14 @@ public class StickyNotesPojo {
 	public Boolean isActive;
 	public Date createdDate;
 	public Date updatedDate;
+	public long stickyNotesId;
 	
+	public long getStickyNotesId() {
+		return stickyNotesId;
+	}
+	public void setStickyNotesId(long stickyNotesId) {
+		this.stickyNotesId = stickyNotesId;
+	}
 	public String getUserid() {
 		return userid;
 	}

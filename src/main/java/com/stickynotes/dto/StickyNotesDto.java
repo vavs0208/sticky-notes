@@ -9,7 +9,7 @@ public class StickyNotesDto {
 	private Boolean isActive;
     private Date createdAt;
     private Date updatedAt;
-    
+
     
     
     
