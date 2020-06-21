@@ -14,18 +14,18 @@ import com.stickynotes.entities.UserEntity;
 @Repository
 public interface CreateStickyRepository extends CrudRepository<StickyNotesEntity,String> {
 
-@Query("select stickyNotes from StickyNotesEntity stickyNotes where stickyNotes.userEntity=?1 and stickyNotes.stickyNotesId=?2")
-public Optional<StickyNotesEntity> findByUserEntityAndStickyNotesId(UserEntity userEntity, Long stickyNotesId);
-
-//@Transactional
-//@Query("update StickyNotesEntity stickyNotes set stickyNotes.content=?1 where stickyNotes.stickyNotesId=?2")
-//@Modifying	
-//public int updateStickyNotesEntity(String content, Long stickyNotesId);
+@Query("select stickyNotes from StickyNotesEntity stickyNotes where stickyNotes.userEntity=?1 and stickyNotes.sticky_notes_id=?2")
+public Optional<StickyNotesEntity> findByUserEntityAndStickyNotesId(UserEntity userEntity, String stickyNotesId);
 
 @Transactional
-@Query("update StickyNotesEntity stickyNotes set stickyNotes.content=?1 where stickyNotes.stickyNotesId=?2 and stickyNotes.userEntity=?3")
-@Modifying
+@Query("update StickyNotesEntity stickyNotes set stickyNotes.content=?1 where stickyNotes.sticky_notes_id=?2")
+@Modifying	
+public int updateStickyNotesEntity(String content, String stickyNotesId);
 
-public int updateStickyNotesEntity(String content, Long stickyNotesId, UserEntity userEntitys);
+//@Transactional
+//@Query("update StickyNotesEntity stickyNotes set stickyNotes.content=?1 where stickyNotes.sticky_notes_id=?2 and stickyNotes.userEntity=?3")
+//@Modifying
+//
+//public int updateStickyNotesEntity(String content, String stickyNotesId, UserEntity userEntitys);
 
 }

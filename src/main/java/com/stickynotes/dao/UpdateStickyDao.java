@@ -29,35 +29,12 @@ public class UpdateStickyDao {
 	@Autowired
 	UserRepository userRepository;
 	
-	public StickyNotesDto updateStickyNotes(StickyNotesPojo stickyNotesPojo) {
-		Optional<UserEntity> optional = userRepository.findById(stickyNotesPojo.userid);
-		StickyNotesDto stickyNotesDto =  new StickyNotesDto();
-	if(optional.isPresent()) {
-		UserEntity userEntity  = optional.get();
-		StickyNotesEntity stickyNotesEntity=new StickyNotesEntity();
-		stickyNotesEntity.setUserEntity(userEntity);	
-
-		Optional<StickyNotesEntity> stickyOptional = createStickyRepository.findByUserEntityAndStickyNotesId(userEntity,stickyNotesPojo.stickyNotesId);
-		if(stickyOptional.isPresent()) {
-			StickyNotesEntity StickyNotesEntity= stickyOptional.get();
-			stickyNotesEntity.setStickyNotesId(stickyNotesPojo.stickyNotesId);
-				stickyNotesEntity.setContent(stickyNotesPojo.content);
-				stickyNotesEntity.setCreatedAt(StickyNotesEntity.getCreatedAt());
-				stickyNotesEntity.setUpdatedAt(new Date());
-				stickyNotesEntity.setIsActive(true);		
-				int i = createStickyRepository.updateStickyNotesEntity(stickyNotesPojo.content, stickyNotesPojo.stickyNotesId, userEntity);
-//					StickyNotesEntity stickyNotesEntityUpdated = createStickyRepository.save(stickyNotesEntity);					
-//					ModelMapper modelMapper = new ModelMapper();		
-//					modelMapper.map(stickyNotesEntityUpdated, stickyNotesDto);
-				stickyNotesDto.setContent(""+i);
-			
+	public String updateStickyNotes(StickyNotesPojo stickyNotesPojo) {
+					int i = createStickyRepository.updateStickyNotesEntity(stickyNotesPojo.content, stickyNotesPojo.stickyNotesId);
+		if(i!=0) {	
+			return "record updated";
 		}else {
-			stickyNotesDto.setContent("No note found to update, of stickyNotesId: "+stickyNotesPojo.stickyNotesId+" and user: "+stickyNotesPojo.userid);}
-	
-	}else {
-		stickyNotesDto.setContent("No user exist of userid: "+stickyNotesPojo.userid);		
+			return "record not updated";	
 	}
-	return stickyNotesDto;						
 	}
-
 }

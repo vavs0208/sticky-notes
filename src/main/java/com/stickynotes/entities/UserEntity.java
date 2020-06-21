@@ -9,10 +9,10 @@ import javax.persistence.Table;
 public class UserEntity {
 	
 	public String getUserid() {
-		return userid;
+		return user_id;
 	}
 	public void setUserid(String userid) {
-		this.userid = userid;
+		this.user_id = userid;
 	}
 	public String getName() {
 		return name;
@@ -35,7 +35,7 @@ public class UserEntity {
 	
 
 	@Id
-	private String userid;
+	private String user_id;
 	private String name;
 	private String email;
 	private String country;

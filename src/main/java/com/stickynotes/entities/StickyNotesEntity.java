@@ -21,20 +21,20 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="sticky_notes")
+@Table(name="sticky_notes_vaibhav")
 public class StickyNotesEntity {
 	
 	@Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	private Long stickyNotesId;
+	private String sticky_notes_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
 	private UserEntity userEntity;
 	
 	private String content;
-	private Boolean isActive;
+	private Boolean is_active;
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -48,12 +48,12 @@ public class StickyNotesEntity {
 
 	
 
-	public Long getStickyNotesId() {
-		return stickyNotesId;
+	public String getStickyNotesId() {
+		return sticky_notes_id;
 	}
 
-	public void setStickyNotesId(Long stickyNotesId) {
-		this.stickyNotesId = stickyNotesId;
+	public void setStickyNotesId(String stickyNotesId) {
+		this.sticky_notes_id = stickyNotesId;
 	}
 
 	public UserEntity getUserEntity() {
@@ -73,11 +73,11 @@ public class StickyNotesEntity {
 	}
 
 	public Boolean getIsActive() {
-		return isActive;
+		return is_active;
 	}
 
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
+	public void setIsActive(Boolean is_active) {
+		this.is_active = is_active;
 	}
 
 	public Date getCreatedAt() {
