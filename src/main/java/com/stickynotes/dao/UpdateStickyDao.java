@@ -2,6 +2,7 @@ package com.stickynotes.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -39,17 +40,14 @@ public class UpdateStickyDao {
 			return "record not updated";	
 	}
 	}
-	//need to create proper layering
+	
+	//Below code is for fetching notes created in last 6 months
 	public List<StickyNotesEntity> fetchStickyNotes(StickyNotesPojo stickyNotesPojo) {
 		List<StickyNotesEntity> notes = new ArrayList<StickyNotesEntity>();
-		Date now = new Date();
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-        String mysqlDateString = formatter.format(now);
-        System.out.println("Java's Default Date Format: " + now);
-        System.out.println("Mysql's Default Date Format: " + mysqlDateString);
-
-        java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+		Calendar c = Calendar.getInstance();
+		c.add(c.MONTH, -6);
+		Date sixMonthOld = c.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(sixMonthOld.getTime());
 		createStickyRepository.fetchStickyNotesEntity(sqlDate).forEach(notes::add);
 		System.out.println("noted: "+notes);
 		return notes;
