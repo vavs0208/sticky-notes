@@ -30,7 +30,7 @@ public class FetchStickyDao {
 		Calendar c = Calendar.getInstance();
 		c.add(c.MONTH, -period);
 		Date sixMonthOld = c.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(sixMonthOld.getTime());
+        java.sql.Timestamp sqlDate = new java.sql.Timestamp(sixMonthOld.getTime());
         
 		createStickyRepository.fetchStickyNotesEntity(sqlDate).forEach(notes::add);
 		
@@ -58,9 +58,9 @@ public class FetchStickyDao {
 		Calendar c = Calendar.getInstance();
 		c.add(c.MONTH, -period);
 		Date sixMonthOld = c.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(sixMonthOld.getTime());
+        java.sql.Timestamp date = new java.sql.Timestamp(sixMonthOld.getTime());
         
-		createStickyRepository.fetchStickyNotesEntityUser(sqlDate,userId).forEach(notes::add);
+		createStickyRepository.fetchStickyNotesEntityUser(date,userId).forEach(notes::add);
 		
 		ModelMapper modelMapper = new ModelMapper();
 		
