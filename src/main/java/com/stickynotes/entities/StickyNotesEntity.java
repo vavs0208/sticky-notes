@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,39 +22,59 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/*
+ * This class is being used as an entity to create new StickyNotes and persist in the database.
+ */
 @Entity
-@Table(name="sticky_notes")
+@Table(name="sticky_notes_vaibhav")
 public class StickyNotesEntity {
 	
-	@Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	private Long stickyNotesId;
+	@Id 
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid",strategy="uuid")
+	@ColumnDefault("1001")
+	@Column(name="sticky_notes_id")
+	private String stickyNotesId;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
 	private UserEntity userEntity;
 	
 	private String content;
+	
+	@Column(name="is_active")
 	private Boolean isActive;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
-    private Date createdAt;
+    private Date createdDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_date", nullable = false)
     @LastModifiedDate
     private Date updatedAt;
 
-	
+    @ManyToOne(optional = false)
+    @JoinColumn(name="project_id", nullable=false)
+	private ProjectStickyEntity projectStickyEntity;
 
-	public Long getStickyNotesId() {
+    
+	public ProjectStickyEntity getProjectStickyEntity() {
+		return projectStickyEntity;
+	}
+
+	public void setProjectStickyEntity(ProjectStickyEntity projectStickyEntity) {
+		this.projectStickyEntity = projectStickyEntity;
+	}
+
+	public String getStickyNotesId() {
 		return stickyNotesId;
 	}
 
-	public void setStickyNotesId(Long stickyNotesId) {
+	public void setStickyNotesId(String stickyNotesId) {
 		this.stickyNotesId = stickyNotesId;
 	}
 
@@ -80,12 +102,12 @@ public class StickyNotesEntity {
 		this.isActive = isActive;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Date getUpdatedAt() {
